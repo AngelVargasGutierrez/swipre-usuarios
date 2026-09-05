@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { margin:0; background:#1e1e1e; font-family:'Cascadia Code','Consolas',monospace; }
+  .titlebar { background:#323233; color:#ccc; padding:8px 14px; font-size:13px; border-bottom:1px solid #000; }
+  .term { padding:20px 24px; color:#d4d4d4; font-size:14px; line-height:1.55; white-space:pre-wrap; width:960px; }
+  .cmd { color:#9cdcfe; }
+  .prompt { color:#6a9955; }
+  .run { color:#fff; background:#0451a5; padding:1px 6px; border-radius:3px; font-weight:bold; }
+  .pass { color:#4ec9b0; font-weight:bold; }
+  .file { color:#dcdcaa; }
+  .desc { color:#ce9178; }
+  .summary { color:#569cd6; font-weight:bold; }
+  .ok { color:#4ec9b0; font-weight:bold; }
+</style>
+</head>
+<body>
+<div class="titlebar">swipre-usuarios — npm test</div>
+<div class="term">
+<span class="prompt">PS D:\...\swipre-usuarios&gt;</span> <span class="cmd">npm test</span>
+
+<span class="run"> RUN </span> v2.1.9 D:/10MO/CSWII/CASOS DE PRUEBA/SEMANA 4/swipre-usuarios
+
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-01 - Registro completo de nuevo usuario con rol asignado (Flujo Normal / Éxito)</span> &gt; crea un usuario Administrador con todos los datos obligatorios
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-01 - Registro completo de nuevo usuario con rol asignado (Flujo Normal / Éxito)</span> &gt; crea un usuario Jefatura con todos los datos obligatorios
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-01 - Registro completo de nuevo usuario con rol asignado (Flujo Normal / Éxito)</span> &gt; crea un usuario Farmacia con todos los datos obligatorios
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-01 - Registro completo de nuevo usuario con rol asignado (Flujo Normal / Éxito)</span> &gt; crea un usuario Logística con todos los datos obligatorios
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-02 - Validación de campos obligatorios en formulario de usuario (Flujo Normal / Error, Prueba Unitaria)</span> &gt; rechaza la creación si falta el nombre de usuario
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-02 - Validación de campos obligatorios en formulario de usuario (Flujo Normal / Error, Prueba Unitaria)</span> &gt; rechaza la creación si falta la contraseña
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-02 - Validación de campos obligatorios en formulario de usuario (Flujo Normal / Error, Prueba Unitaria)</span> &gt; rechaza la creación si el rol no existe en el sistema
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-02 - Validación de campos obligatorios en formulario de usuario (Flujo Normal / Error, Prueba Unitaria)</span> &gt; rechaza la creación si el nombre de usuario ya existe
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-03 - Bloqueo inmediato de acceso al deshabilitar usuario (Flujo Normal / Error)</span> &gt; deshabilita un usuario activo y le impide iniciar sesión inmediatamente
+<span class="pass"> ✓</span> <span class="file">tests/usuarios.test.js</span> &gt; <span class="desc">CP-02-03 - Bloqueo inmediato de acceso al deshabilitar usuario (Flujo Normal / Error)</span> &gt; reactivar un usuario inactivo le vuelve a permitir iniciar sesión
+
+<span class="summary"> Test Files</span>  <span class="ok">1 passed</span> (1)
+<span class="summary">      Tests</span>  <span class="ok">10 passed</span> (10)
+<span class="summary">   Start at</span>  22:33:34
+<span class="summary">   Duration</span>  1.53s
+</div>
+</body>
+</html>
