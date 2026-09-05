@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>swipre-usuarios — Gestión de Usuarios (RF-002)</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 480px; margin: 40px auto; }
+    h1 { font-size: 20px; }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    input, select { width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box; }
+    button { margin-top: 16px; padding: 8px 16px; background: #b91c1c; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    #resultado { margin-top: 16px; padding: 10px; border-radius: 4px; }
+    #resultado.exito { background: #d5f5e3; color: #1e8449; }
+    #resultado.error { background: #fdebd0; color: #a04000; }
+  </style>
+</head>
+<body>
+  <h1>MOPGIMED / SIPGIMED — Registrar Usuario (RF-002)</h1>
+  <form id="form-usuario">
+    <label for="username">Usuario</label>
+    <input id="username" name="username" type="text">
+
+    <label for="password">Contraseña</label>
+    <input id="password" name="password" type="password">
+
+    <label for="role">Rol</label>
+    <select id="role" name="role">
+      <option value="">-- Selecciona un rol --</option>
+      <option value="admin">Administrador</option>
+      <option value="jefatura">Jefatura</option>
+      <option value="farmacia">Farmacia</option>
+      <option value="almacen">Almacén</option>
+      <option value="logistica">Logística</option>
+    </select>
+
+    <label for="name">Nombre completo</label>
+    <input id="name" name="name" type="text">
+
+    <label for="email">Correo (opcional)</label>
+    <input id="email" name="email" type="email">
+
+    <button type="submit" id="btn-crear">Crear Usuario</button>
+  </form>
+
+  <div id="resultado" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

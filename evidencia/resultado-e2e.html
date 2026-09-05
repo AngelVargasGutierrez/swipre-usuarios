@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { margin:0; background:#1e1e1e; font-family:'Cascadia Code','Consolas',monospace; }
+  .titlebar { background:#323233; color:#ccc; padding:8px 14px; font-size:13px; border-bottom:1px solid #000; }
+  .term { padding:20px 24px; color:#d4d4d4; font-size:14px; line-height:1.6; white-space:pre-wrap; width:980px; }
+  .cmd { color:#9cdcfe; }
+  .prompt { color:#6a9955; }
+  .ok { color:#4ec9b0; font-weight:bold; }
+  .desc { color:#ce9178; }
+  .summary { color:#569cd6; font-weight:bold; }
+</style>
+</head>
+<body>
+<div class="titlebar">swipre-usuarios — npm run test:e2e (Playwright)</div>
+<div class="term">
+<span class="prompt">PS D:\...\swipre-usuarios&gt;</span> <span class="cmd">npx playwright test</span>
+
+Running 4 tests using 1 worker
+
+<span class="ok">  ok 1</span> <span class="desc">CP-02-01 - Registro completo de nuevo usuario con rol asignado (E2E, navegador real)</span> &gt; crea un usuario Administrador llenando el formulario real en el navegador (1.3s)
+<span class="ok">  ok 2</span> <span class="desc">CP-02-01 - Registro completo de nuevo usuario con rol asignado (E2E, navegador real)</span> &gt; crea un usuario Logística llenando el formulario real en el navegador (251ms)
+<span class="ok">  ok 3</span> <span class="desc">CP-02-02 - Validación de campos obligatorios en formulario de usuario (E2E, navegador real)</span> &gt; muestra el error real del backend si se envía el formulario sin nombre de usuario (234ms)
+<span class="ok">  ok 4</span> <span class="desc">CP-02-02 - Validación de campos obligatorios en formulario de usuario (E2E, navegador real)</span> &gt; muestra el error real del backend si el nombre de usuario ya existe (436ms)
+
+<span class="summary">  4 passed</span> (10.0s)
+</div>
+</body>
+</html>
