@@ -1,0 +1,184 @@
+{
+  "info": {
+    "name": "swipre-usuarios (RF-002 Gestionar usuarios y asignar rol)",
+    "description": "Coleccion Postman para RF-002. CP-02-01 (exito, 4 roles), CP-02-02 (error: campos obligatorios, rol invalido, usuario duplicado) y CP-02-03 (bloqueo/reactivacion de acceso).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "0 - Reiniciar estado en memoria (solo una vez, al inicio)",
+      "request": { "method": "POST", "url": "{{base_url}}/api/__reset" },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status 200 OK', () => pm.response.to.have.status(200));"] } }]
+    },
+    {
+      "name": "CP-02-01 - Crear usuario Administrador",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/usuarios",
+        "body": { "mode": "raw", "raw": "{\"username\":\"nueva.admin\",\"password\":\"Clave#1\",\"role\":\"admin\",\"name\":\"Sofia Perez\",\"email\":\"sofia@mopgimed.com\"}" }
+      },
+      "event": [{
+        "listen": "test",
+        "script": {
+          "exec": [
+            "pm.test('Status 201 Created', () => pm.response.to.have.status(201));",
+            "const body = pm.response.json();",
+            "pm.test('Retorna un id numerico', () => pm.expect(body.id).to.be.a('number'));"
+          ]
+        }
+      }]
+    },
+    {
+      "name": "CP-02-01 - Crear usuario Jefatura",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/usuarios",
+        "body": { "mode": "raw", "raw": "{\"username\":\"nueva.jefatura\",\"password\":\"Clave#2\",\"role\":\"jefatura\",\"name\":\"Karen Flores\"}" }
+      },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status 201 Created', () => pm.response.to.have.status(201));"] } }]
+    },
+    {
+      "name": "CP-02-01 - Crear usuario Farmacia",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/usuarios",
+        "body": { "mode": "raw", "raw": "{\"username\":\"nueva.farmacia\",\"password\":\"Clave#3\",\"role\":\"farmacia\",\"name\":\"Jorge Huanca\"}" }
+      },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status 201 Created', () => pm.response.to.have.status(201));"] } }]
+    },
+    {
+      "name": "CP-02-01 - Crear usuario Logística",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/usuarios",
+        "body": { "mode": "raw", "raw": "{\"username\":\"nueva.logistica\",\"password\":\"Clave#4\",\"role\":\"logistica\",\"name\":\"Diana Coila\"}" }
+      },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status 201 Created', () => pm.response.to.have.status(201));"] } }]
+    },
+    {
+      "name": "CP-02-02 - Rechazo por campo obligatorio faltante (sin username)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/usuarios",
+        "body": { "mode": "raw", "raw": "{\"password\":\"Clave#1\",\"role\":\"admin\",\"name\":\"Sin Usuario\"}" }
+      },
+      "event": [{
+        "listen": "test",
+        "script": {
+          "exec": [
+            "pm.test('Status 400 Bad Request', () => pm.response.to.have.status(400));",
+            "const body = pm.response.json();",
+            "pm.test('Mensaje correcto', () => pm.expect(body.error).to.eql('Faltan campos obligatorios'));"
+          ]
+        }
+      }]
+    },
+    {
+      "name": "CP-02-02 - Rechazo por rol inválido",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/usuarios",
+        "body": { "mode": "raw", "raw": "{\"username\":\"rol.invalido\",\"password\":\"Clave#1\",\"role\":\"super-admin\",\"name\":\"Rol Invalido\"}" }
+      },
+      "event": [{
+        "listen": "test",
+        "script": {
+          "exec": [
+            "pm.test('Status 400 Bad Request', () => pm.response.to.have.status(400));",
+            "const body = pm.response.json();",
+            "pm.test('Mensaje correcto', () => pm.expect(body.error).to.eql('Rol inválido'));"
+          ]
+        }
+      }]
+    },
+    {
+      "name": "CP-02-02 - Rechazo por usuario duplicado (1/2 crea)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/usuarios",
+        "body": { "mode": "raw", "raw": "{\"username\":\"duplicado\",\"password\":\"Clave#1\",\"role\":\"farmacia\",\"name\":\"Primero\"}" }
+      },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status 201 Created', () => pm.response.to.have.status(201));"] } }]
+    },
+    {
+      "name": "CP-02-02 - Rechazo por usuario duplicado (2/2 repite)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/usuarios",
+        "body": { "mode": "raw", "raw": "{\"username\":\"duplicado\",\"password\":\"Clave#2\",\"role\":\"jefatura\",\"name\":\"Segundo\"}" }
+      },
+      "event": [{
+        "listen": "test",
+        "script": {
+          "exec": [
+            "pm.test('Status 409 Conflict', () => pm.response.to.have.status(409));",
+            "const body = pm.response.json();",
+            "pm.test('Mensaje correcto', () => pm.expect(body.error).to.eql('El nombre de usuario ya existe'));"
+          ]
+        }
+      }]
+    },
+    {
+      "name": "CP-02-03 - Crear usuario a deshabilitar",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/usuarios",
+        "body": { "mode": "raw", "raw": "{\"username\":\"a.deshabilitar\",\"password\":\"Clave#1\",\"role\":\"farmacia\",\"name\":\"Usuario Temporal\"}" }
+      },
+      "event": [{
+        "listen": "test",
+        "script": {
+          "exec": [
+            "pm.test('Status 201 Created', () => pm.response.to.have.status(201));",
+            "const body = pm.response.json();",
+            "pm.collectionVariables.set('idParaToggle', body.id);"
+          ]
+        }
+      }]
+    },
+    {
+      "name": "CP-02-03 - Deshabilitar usuario (toggle 1/2)",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/usuarios/{{idParaToggle}}/toggle"
+      },
+      "event": [{
+        "listen": "test",
+        "script": {
+          "exec": [
+            "pm.test('Status 200 OK', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('Estado pasa a Inactivo', () => pm.expect(body.estado).to.eql('Inactivo'));"
+          ]
+        }
+      }]
+    },
+    {
+      "name": "CP-02-03 - Reactivar usuario (toggle 2/2)",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/usuarios/{{idParaToggle}}/toggle"
+      },
+      "event": [{
+        "listen": "test",
+        "script": {
+          "exec": [
+            "pm.test('Status 200 OK', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('Estado vuelve a Activo', () => pm.expect(body.estado).to.eql('Activo'));"
+          ]
+        }
+      }]
+    }
+  ],
+  "variable": [{ "key": "idParaToggle", "value": "" }]
+}

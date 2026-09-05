@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { margin:0; background:#1e1e1e; font-family:'Cascadia Code','Consolas',monospace; }
+  .titlebar { background:#323233; color:#ccc; padding:8px 14px; font-size:13px; border-bottom:1px solid #000; }
+  .term { padding:20px 24px; color:#d4d4d4; font-size:13px; line-height:1.5; white-space:pre-wrap; width:1000px; }
+  .cmd { color:#9cdcfe; }
+  .prompt { color:#6a9955; }
+  .req { color:#dcdcaa; font-weight:bold; }
+  .meth { color:#569cd6; }
+  .ok { color:#4ec9b0; font-weight:bold; }
+  .summary { color:#569cd6; font-weight:bold; }
+</style>
+</head>
+<body>
+<div class="titlebar">swipre-usuarios — npm run test:postman (Newman / Postman)</div>
+<div class="term">
+<span class="prompt">PS D:\...\swipre-usuarios&gt;</span> <span class="cmd">npm run test:postman</span>
+
+newman
+
+swipre-usuarios (RF-002 Gestionar usuarios y asignar rol)
+
+<span class="req">→ 0 - Reiniciar estado en memoria (solo una vez, al inicio)</span>
+  <span class="meth">POST</span> http://localhost:3010/api/__reset [200 OK]
+  <span class="ok">√  Status 200 OK</span>
+
+<span class="req">→ CP-02-01 - Crear usuario Administrador</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios [201 Created]
+  <span class="ok">√  Status 201 Created</span>
+  <span class="ok">√  Retorna un id numerico</span>
+
+<span class="req">→ CP-02-01 - Crear usuario Jefatura</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios [201 Created]
+  <span class="ok">√  Status 201 Created</span>
+
+<span class="req">→ CP-02-01 - Crear usuario Farmacia</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios [201 Created]
+  <span class="ok">√  Status 201 Created</span>
+
+<span class="req">→ CP-02-01 - Crear usuario Logística</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios [201 Created]
+  <span class="ok">√  Status 201 Created</span>
+
+<span class="req">→ CP-02-02 - Rechazo por campo obligatorio faltante (sin username)</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios [400 Bad Request]
+  <span class="ok">√  Status 400 Bad Request</span>
+  <span class="ok">√  Mensaje correcto</span>
+
+<span class="req">→ CP-02-02 - Rechazo por rol inválido</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios [400 Bad Request]
+  <span class="ok">√  Status 400 Bad Request</span>
+  <span class="ok">√  Mensaje correcto</span>
+
+<span class="req">→ CP-02-02 - Rechazo por usuario duplicado (1/2 crea)</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios [201 Created]
+  <span class="ok">√  Status 201 Created</span>
+
+<span class="req">→ CP-02-02 - Rechazo por usuario duplicado (2/2 repite)</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios [409 Conflict]
+  <span class="ok">√  Status 409 Conflict</span>
+  <span class="ok">√  Mensaje correcto</span>
+
+<span class="req">→ CP-02-03 - Crear usuario a deshabilitar</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios [201 Created]
+  <span class="ok">√  Status 201 Created</span>
+
+<span class="req">→ CP-02-03 - Deshabilitar usuario (toggle 1/2)</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios/7/toggle [200 OK]
+  <span class="ok">√  Status 200 OK</span>
+  <span class="ok">√  Estado pasa a Inactivo</span>
+
+<span class="req">→ CP-02-03 - Reactivar usuario (toggle 2/2)</span>
+  <span class="meth">POST</span> http://localhost:3010/api/usuarios/7/toggle [200 OK]
+  <span class="ok">√  Status 200 OK</span>
+  <span class="ok">√  Estado vuelve a Activo</span>
+
+<span class="summary">  requests: 12/12   assertions: 18/18   0 failed</span>
+</div>
+</body>
+</html>
